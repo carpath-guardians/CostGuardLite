@@ -18,7 +18,8 @@ public class Ec2UtilisationChecklistItem implements AwsCostGuardChecklistItem {
     public List<ReportItem> check(AwsTenant tenant) {
         try (Ec2Client ec2Client = tenant.configureClient(Ec2Client.builder());
              CloudWatchClient cloudWatchClient = tenant.configureClient(CloudWatchClient.builder())) {
-            return new Ec2InstanceAnalyzer(ec2Client, cloudWatchClient, tenant.getAccountId()).analyzeCPU();
+            return new Ec2CpuUsageAnalyzer(ec2Client, cloudWatchClient, tenant.getAccountId())
+                    .analyzeCPU();
         }
     }
 
