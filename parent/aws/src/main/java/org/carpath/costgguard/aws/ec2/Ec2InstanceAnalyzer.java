@@ -56,6 +56,9 @@ public class Ec2InstanceAnalyzer {
     }
 
     private ReportItem analyzeMetric(MetricDataResult metricDataResult, String metricName) {
+        if (!metricDataResult.hasValues()) {
+            return null;
+        }
         Double value = metricDataResult.values().get(0);
         String instanceId = metricDataResult.label();
 
