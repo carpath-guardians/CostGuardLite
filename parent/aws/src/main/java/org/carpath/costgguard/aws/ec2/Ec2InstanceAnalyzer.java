@@ -56,16 +56,16 @@ public class Ec2InstanceAnalyzer {
     }
 
     private ReportItem analyzeMetric(MetricDataResult metricDataResult, String metricName) {
-        if (!metricDataResult.hasValues()) {
+        if (!metricDataResult.hasValues() || metricDataResult.values().isEmpty()) {
             return null;
         }
         Double value = metricDataResult.values().get(0);
         String instanceId = metricDataResult.label();
 
         if (value > UPPER_THRESHOLD) {
-            return new ReportItem("Instance" + instanceId + " has permanently overloaded " + metricName + "please scale up", 1);
+            return new ReportItem("Instance " + instanceId + " has continuously overloaded " + metricName + ": please scale up", 1);
         } else if (value < LOWER_THRESHOLD) {
-            return new ReportItem("Instance" + instanceId + " is permanently underutilized for " + metricName + "please scale down", -1);
+            return new ReportItem("Instance " + instanceId + " is continuously underutilized for " + metricName + " metric: please scale down", -1);
         }
         return null;
     }
