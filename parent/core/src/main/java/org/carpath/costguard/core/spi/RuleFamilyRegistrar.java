@@ -13,6 +13,7 @@ public class RuleFamilyRegistrar {
 
     static {
         ServiceLoader<RuleFamily> familyLoader = ServiceLoader.load(RuleFamily.class);
+        familyLoader.reload();
         Map<String, RuleFamily<Tenant, ChecklistItem<Tenant>>> families = new HashMap<>();
         familyLoader.forEach(family -> families.put(family.getName(), family));
         FAMILIES = Collections.unmodifiableMap(families);
