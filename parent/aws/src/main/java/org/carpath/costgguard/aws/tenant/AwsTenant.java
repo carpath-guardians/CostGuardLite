@@ -25,6 +25,10 @@ public class AwsTenant implements Tenant {
         return accountId + "-" + region;
     }
 
+    public String getAccountId() {
+        return accountId;
+    }
+
     public <T extends AwsClient, B extends AwsClientBuilder<B, T>> T configureClient(AwsClientBuilder<B , T> clientBuilder) {
         return clientBuilder.credentialsProvider(credentialsProvider).region(region).build();
     }
