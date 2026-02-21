@@ -11,7 +11,7 @@ class AppReport extends HTMLElement {
     }
 
     set data(value) {
-        this._data = value
+        this._data = value.apiResponse
         this._loading = false
         this._error = null
         this.render()
@@ -50,9 +50,9 @@ class AppReport extends HTMLElement {
                         .map(
                             item => `
               <li class="item">
-                <div class="description">${item.description}</div>
+                <div class="description"><b>Message</b>: ${item.description}</div>
                 <div class="threshold">
-                  ThresholdDelta: ${item.thresholdDelta} 
+                  <b>ThresholdDelta</b>: ${item.thresholdDelta} 
                   ${item.thresholdDelta === -1 ? ' (underutilized)' : ''}
                 </div>
               </li>
