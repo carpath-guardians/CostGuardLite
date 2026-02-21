@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <title>Multi Select + API Report</title>
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+<h1>Multi Select + API Report</h1>
+
+<div class="container">
+
+  <div class="card card-left">
+    <multi-select
+            id="techSelect"
+            options='[
+          {"label":"JavaScript","value":"js"},
+          {"label":"TypeScript","value":"ts"},
+          {"label":"React","value":"react"},
+          {"label":"Node.js","value":"node"}
+        ]'
+    ></multi-select>
+
+    <button id="fetchBtn">Send API Request</button>
+  </div>
+
+  <div class="card">
+    <app-report id="report"></app-report>
+  </div>
+
+</div>
+
+<script type="module" src="./multi-select.js"></script>
+<script type="module" src="./report.js"></script>
+
+<script type="module">
+  import { getReport } from './api.js'
+
+  const select = document.getElementById('techSelect')
+  const button = document.getElementById('fetchBtn')
+  const report = document.getElementById('report')
+
+  button.addEventListener('click', async () => {
+    const selectedValues = select.value
+
+    if (!selectedValues.length) {
+      report.error = 'Please select at least one item.'
+      return
+    }
+
+    report.loading = true
+    button.disabled = true
+
+    try {
+      const result = await getReport(selectedValues)
+      report.data = result
+    } catch (error) {
+      report.error = error.message
+    } finally {
+      button.disabled = false
+    }
+  })
+</script>
+
+</body>
+</html>
