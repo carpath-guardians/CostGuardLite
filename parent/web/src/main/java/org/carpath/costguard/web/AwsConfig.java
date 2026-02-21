@@ -1,6 +1,6 @@
 package org.carpath.costguard.web;
 
-import org.carpath.costgguard.aws.tenant.AwsTenant;
+import org.carpath.costguard.aws.tenant.AwsTenant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;

@@ -1,6 +1,6 @@
 package org.carpath.costguard.web;
 
-import org.carpath.costgguard.aws.tenant.AwsTenant;
+import org.carpath.costguard.aws.tenant.AwsTenant;
 import org.carpath.costguard.core.api.ChecklistItem;
 import org.carpath.costguard.core.api.CostGuard;
 import org.carpath.costguard.core.api.Tenant;

@@ -1,4 +1,4 @@
-package org.carpath.costgguard.aws.tenant;
+package org.carpath.costguard.aws.tenant;
 
 import org.carpath.costguard.core.api.Tenant;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;

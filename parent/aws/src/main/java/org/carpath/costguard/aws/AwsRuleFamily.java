@@ -1,7 +1,7 @@
-package org.carpath.costgguard.aws;
+package org.carpath.costguard.aws;
 
 import com.google.auto.service.AutoService;
-import org.carpath.costgguard.aws.tenant.AwsTenant;
+import org.carpath.costguard.aws.tenant.AwsTenant;
 import org.carpath.costguard.core.spi.RuleFamily;
 
 @AutoService(RuleFamily.class)

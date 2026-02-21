@@ -1,4 +1,4 @@
-package org.carpath.costgguard.aws.ec2;
+package org.carpath.costguard.aws.ec2;
 
 import org.carpath.costguard.core.api.ReportItem;
 import software.amazon.awssdk.services.cloudwatch.CloudWatchClient;
