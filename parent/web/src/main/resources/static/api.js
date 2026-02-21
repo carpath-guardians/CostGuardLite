@@ -1,5 +1,5 @@
 export async function getReport(selectedValues) {
-    const response = await fetch(`/analyze?services=${selectedValues.join()}`)
+    const response = await fetch(`/analyze?rules=${selectedValues.join()}`)
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')

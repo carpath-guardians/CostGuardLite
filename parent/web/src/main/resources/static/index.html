@@ -6,12 +6,13 @@
   <meta name="color-scheme" content="light" />
   <title>Multi Select + API Report</title>
 
-  <!-- Link external CSS -->
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
 
-<h1>Multi Select + API Report</h1>
+<header class="header">
+  <h1 class="header-title">Cost Guardians</h1>
+</header>
 
 <div class="container">
 
@@ -19,14 +20,11 @@
     <multi-select
             id="techSelect"
             options='[
-          {"label":"JavaScript","value":"js"},
-          {"label":"TypeScript","value":"ts"},
-          {"label":"React","value":"react"},
-          {"label":"Node.js","value":"node"}
+          {"label":"EC2-CPU","value":"ec2-cpu"}
         ]'
     ></multi-select>
 
-    <button id="fetchBtn">Send API Request</button>
+    <button id="fetchBtn">Generate Report</button>
   </div>
 
   <div class="card">

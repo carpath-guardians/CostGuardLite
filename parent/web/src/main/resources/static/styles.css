@@ -86,3 +86,23 @@ app-report {
     display: block;
     overflow: auto;
 }
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.header-logo {
+    width: 60px; /* adjust as needed */
+    height: 60px;
+    object-fit: contain;
+}
+
+.header-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #0f172a;
+}

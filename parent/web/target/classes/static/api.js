@@ -1,5 +1,3 @@
-const url = 'http://localhost:8';
-
 export async function getReport(selectedValues) {
     const response = await fetch(`/analyze?services=${selectedValues.join()}`)
 
