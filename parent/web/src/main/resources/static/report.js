@@ -1,9 +1,11 @@
+// report.js
+
 class AppReport extends HTMLElement {
     constructor() {
         super()
         this.attachShadow({ mode: 'open' })
 
-        this._data = null
+        this._data = []
         this._loading = false
         this._error = null
     }
@@ -31,6 +33,41 @@ class AppReport extends HTMLElement {
     }
 
     render() {
+        let content = ''
+
+        if (this._loading) {
+            content = `<div class="loading">Loading...</div>`
+        } else if (this._error) {
+            content = `<div class="error">Error: ${this._error}</div>`
+        } else if (this._data && this._data.length) {
+            content = this._data
+                .map(
+                    tenant => `
+        <div class="tenant">
+          <div class="tenant-title">${tenant.tenant}</div>
+          <ul class="items">
+            ${tenant.items
+                        .map(
+                            item => `
+              <li class="item">
+                <div class="description">${item.description}</div>
+                <div class="threshold">
+                  ThresholdDelta: ${item.thresholdDelta} 
+                  ${item.thresholdDelta === -1 ? ' (underutilized)' : ''}
+                </div>
+              </li>
+            `
+                        )
+                        .join('')}
+          </ul>
+        </div>
+      `
+                )
+                .join('')
+        } else {
+            content = 'No data yet...'
+        }
+
         this.shadowRoot.innerHTML = `
       <style>
         :host {
@@ -43,14 +80,40 @@ class AppReport extends HTMLElement {
           padding: 16px;
           border-radius: 12px;
           font-size: 14px;
-          white-space: pre-wrap;
-          word-break: break-word;
+          overflow: auto;
         }
 
-        .title {
+        .tenant {
+          margin-bottom: 16px;
+        }
+
+        .tenant-title {
           font-weight: 600;
-          margin-bottom: 10px;
+          font-size: 16px;
+          margin-bottom: 8px;
           color: #0f172a;
+        }
+
+        .items {
+          list-style: none;
+          padding-left: 16px;
+        }
+
+        .item {
+          margin-bottom: 8px;
+          padding: 8px;
+          border-left: 3px solid #6366f1;
+          background: #ffffff;
+          border-radius: 6px;
+        }
+
+        .description {
+          margin-bottom: 4px;
+        }
+
+        .threshold {
+          font-weight: 500;
+          color: #334155;
         }
 
         .loading {
@@ -65,16 +128,7 @@ class AppReport extends HTMLElement {
       </style>
 
       <div class="box">
-        <div class="title">API Report</div>
-        ${
-            this._loading
-                ? `<div class="loading">Loading...</div>`
-                : this._error
-                    ? `<div class="error">Error: ${this._error}</div>`
-                    : this._data
-                        ? JSON.stringify(this._data, null, 2)
-                        : 'No data yet...'
-        }
+        ${content}
       </div>
     `
     }
