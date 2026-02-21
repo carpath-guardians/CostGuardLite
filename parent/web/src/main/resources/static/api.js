@@ -1,7 +1,5 @@
-const url = 'http://localhost:8080/';
-
 export async function getReport(selectedValues) {
-    const response = await fetch(`${url}?services=${selectedValues.join()}`)
+    const response = await fetch(`/analyze?services=${selectedValues.join()}`)
 
     if (!response.ok) {
         throw new Error('Failed to fetch data')
